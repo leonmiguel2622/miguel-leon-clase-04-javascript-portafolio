@@ -240,10 +240,3 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
-.hero__frase {
-  font-style: italic;
-  color: var(--text-muted, #94a3b8);
-  font-size: 1.05rem;
-  margin: 0.75rem 0 1.25rem 0;
-  line-height: 1.5;
-}
