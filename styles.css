@@ -125,13 +125,6 @@ code { color: var(--link); background: color-mix(in srgb, var(--link) 12%, trans
   color: var(--muted); font-size: 1.2rem; text-decoration: none; animation: bob 1.8s ease-in-out infinite;
 }
 @keyframes bob { 50% { transform: translate(-50%, 8px); } }
-.hero__frase {
-  font-style: italic;
-  opacity: 0.85;
-  margin-top: 1rem;
-  border-left: 3px solid var(--accent, #a855f7); /* O el color de acento de tu plantilla */
-  padding-left: 0.75rem;
-}
 /* ---- Botones ---- */
 .btn {
   display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.4rem;
@@ -246,4 +239,11 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
+}
+.hero__frase {
+  font-style: italic;
+  color: var(--text-muted, #94a3b8);
+  font-size: 1.05rem;
+  margin: 0.75rem 0 1.25rem 0;
+  line-height: 1.5;
 }
