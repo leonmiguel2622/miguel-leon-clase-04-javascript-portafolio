@@ -37,14 +37,8 @@ export class Portafolio {
     this.$("#p-nombre").textContent = p.nombre;
     this.$("#p-titulo").textContent = p.titulo;
     this.$("#p-resumen").textContent = p.resumen;
+    this.$("#p-frase").textContent = p.frase;
     document.title = `${p.nombre} · Dev`;
-  }
-
-  pintarFrase(){
-    const el = this.$("#p-frase");
-    if (el && this.datos.perfil.frase) {
-      el.textContent = `"${this.datos.perfil.frase}"`;
-    }
   }
   pintarSobreMi() {
     const cont = this.$("#sobre-mi-texto");
