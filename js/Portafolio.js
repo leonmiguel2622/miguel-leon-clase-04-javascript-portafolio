@@ -20,6 +20,7 @@ export class Portafolio {
     this.datos = await res.json();
 
     this.pintarPerfil();
+    this.pintarFrase();
     this.pintarSobreMi();
     this.pintarSkills();
     this.pintarProyectos();

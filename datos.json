@@ -27,7 +27,7 @@
       "descripcion": "Este mismo sitio: HTML, CSS y JavaScript modular con datos desde JSON.",
       "tags": ["HTML", "CSS", "JS"],
       "enlace": "#",
-      "repo": "https://github.com/tu-usuario/portafolio"
+      "repo": "https://leonmiguel2622.github.io/miguel-leon-clase-04-javascript-portafolio/"
     },
     {
       "nombre": "Proyecto de equipo",
@@ -39,7 +39,7 @@
   ],
 
   "redes": {
-    "github": "octocat",
+    "github": "leonmiguel2622",
     "linkedin": "https://www.linkedin.com/in/tu-usuario",
     "linkedinUsuario": "tu-usuario",
     "correo": "tucorreo@ejemplo.com"
