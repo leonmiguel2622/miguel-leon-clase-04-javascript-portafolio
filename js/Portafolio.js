@@ -39,6 +39,12 @@ export class Portafolio {
     document.title = `${p.nombre} · Dev`;
   }
 
+  pintarFrase(){
+    const el = this.$("#p-frase");
+    if (el && this.datos.perfil.frase) {
+      el.textContent = `"${this.datos.perfil.frase}"`;
+    }
+  }
   pintarSobreMi() {
     const cont = this.$("#sobre-mi-texto");
     // .map() transforma cada párrafo en <p>…</p>; .join une el array en un texto.
