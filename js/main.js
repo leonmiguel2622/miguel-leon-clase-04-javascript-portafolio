@@ -58,23 +58,50 @@ async function cargarGitHub(api, animaciones) {
     animaciones.contador(document.querySelector("#stat-following"), perfil.following);
 
     const repos = await api.obtenerRepos(6);
-    cont.innerHTML = "";
-    for (const repo of repos) {
-      const card = document.createElement("article");
-      card.className = "repo reveal";
-      card.innerHTML = `
+    // Guarda en cache para filtrar sin volver a pedir a la API
+    window._reposCache = repos;
+    pintarRepos(repos, cont, animaciones);
+    activarFiltroGithub(cont, animaciones);
+  } catch (error) {
+    cont.innerHTML = "<p class='muted'>No pude cargar GitHub ahora (revisa el usuario o tu conexión).</p>";
+  }
+}
+
+function pintarRepos(lista, cont, animaciones) {
+  if (!lista.length) {
+    cont.innerHTML = `<p class="muted">No hay repos con ese lenguaje.</p>`;
+    return;
+  }
+  cont.innerHTML = "";
+  for (const repo of lista) {
+    const card = document.createElement("article");
+    card.className = "repo reveal";
+    card.innerHTML = `
         <h3><i class="fa-solid fa-book-bookmark"></i> ${repo.name}</h3>
         <p>${repo.description || "Sin descripción"}</p>
         <div class="repo__foot">
           <span>⭐ ${repo.stargazers_count} · ${repo.language || "—"}</span>
           <a href="${repo.html_url}" target="_blank">Ver →</a>
         </div>`;
-      cont.appendChild(card);
-      animaciones.observar(card);
-    }
-  } catch (error) {
-    cont.innerHTML = "<p class='muted'>No pude cargar GitHub ahora (revisa el usuario o tu conexión).</p>";
+    cont.appendChild(card);
+    animaciones.observar(card);
   }
+}
+
+function activarFiltroGithub(cont, animaciones) {
+  const filtro = document.querySelector("#filtro-github");
+  if (!filtro) return;
+  filtro.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-lang]");
+    if (!btn) return;
+    const lang = btn.dataset.lang;
+    const filtrados = lang === "todos" ? window._reposCache : window._reposCache.filter((r) => r.language === lang);
+    pintarRepos(filtrados, cont, animaciones);
+    filtro.querySelectorAll("button").forEach((b) => b.classList.remove("btn--primary"));
+    filtro.querySelectorAll("button").forEach((b) => b.classList.add("btn--ghost"));
+    btn.classList.remove("btn--ghost");
+    btn.classList.add("btn--primary");
+  });
 }
 
 iniciar();

@@ -24,6 +24,7 @@ export class Portafolio {
     this.pintarSobreMi();
     this.pintarSkills();
     this.pintarProyectos();
+    this.activarFiltro();
     this.pintarRedes();
     return this.datos;
   }
@@ -62,9 +63,14 @@ export class Portafolio {
       </li>`).join("");
   }
 
-  pintarProyectos() {
+  pintarProyectos(lista = this.datos.proyectos) {
     const cont = this.$("#proyectos-lista");
-    cont.innerHTML = this.datos.proyectos.map((proy) => {
+    if (!cont) return;
+    if (!lista.length) {
+      cont.innerHTML = `<p class="muted">No hay proyectos con ese filtro.</p>`;
+      return;
+    }
+    cont.innerHTML = lista.map((proy) => {
       const tags = proy.tags.map((t) => `<span class="tag">${t}</span>`).join("");
       return `
         <article class="repo reveal">
@@ -78,6 +84,26 @@ export class Portafolio {
         </article>`;
     }).join("");
     this.animaciones.observarReveals(cont); // que aparezcan al hacer scroll
+  }
+
+  filtrarProyectos(tag) {
+    const filtrados = tag === "todos" ? this.datos.proyectos : this.datos.proyectos.filter((p) => p.tags.includes(tag));
+    this.pintarProyectos(filtrados);
+  }
+
+  activarFiltro() {
+    const cont = this.$("#filtro-proyectos");
+    if (!cont) return;
+    cont.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-tag]");
+      if (!btn) return;
+      const tag = btn.dataset.tag;
+      this.filtrarProyectos(tag);
+      cont.querySelectorAll("button").forEach((b) => b.classList.remove("btn--primary"));
+      cont.querySelectorAll("button").forEach((b) => b.classList.add("btn--ghost"));
+      btn.classList.remove("btn--ghost");
+      btn.classList.add("btn--primary");
+    });
   }
 
   pintarRedes() {

@@ -79,6 +79,12 @@
     <section class="section" id="proyectos">
       <p class="eyebrow reveal">03 — Lo que he construido</p>
       <h2 class="reveal">Proyectos</h2>
+      <div id="filtro-proyectos" class="filtro reveal" style="margin-bottom:1.2rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <button data-tag="todos" class="btn btn--primary">Todos</button>
+        <button data-tag="JS" class="btn btn--ghost">JS</button>
+        <button data-tag="HTML" class="btn btn--ghost">HTML</button>
+        <button data-tag="En progreso" class="btn btn--ghost">En progreso</button>
+      </div>
       <div class="repos reveal" id="proyectos-lista"><!-- se llena desde JSON --></div>
     </section>
 
@@ -90,6 +96,12 @@
         <div class="stat"><span class="stat__num" id="stat-repos">0</span><span class="stat__label">Repositorios</span></div>
         <div class="stat"><span class="stat__num" id="stat-followers">0</span><span class="stat__label">Seguidores</span></div>
         <div class="stat"><span class="stat__num" id="stat-following">0</span><span class="stat__label">Siguiendo</span></div>
+      </div>
+      <div id="filtro-github" class="filtro reveal" style="margin-bottom:1.2rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <button data-lang="todos" class="btn btn--primary">Todos</button>
+        <button data-lang="JavaScript" class="btn btn--ghost">JavaScript</button>
+        <button data-lang="HTML" class="btn btn--ghost">HTML</button>
+        <button data-lang="CSS" class="btn btn--ghost">CSS</button>
       </div>
       <div class="repos reveal" id="gh-repos"><p class="muted">Cargando repositorios…</p></div>
     </section>
