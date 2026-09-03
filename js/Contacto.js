@@ -18,6 +18,7 @@ export class Contacto {
     if (datos.nombre.trim() === "")            return "⚠️ Escribe tu nombre.";
     if (!datos.correo.includes("@"))           return "⚠️ El correo no es válido.";
     if (datos.mensaje.trim().length < 10)      return "⚠️ El mensaje es muy corto (mín. 10 letras).";
+    if (datos.mensaje.toLowerCase().includes("http")) return "⚠️ No se permiten enlaces en el mensaje.";
     return "";
   }
 

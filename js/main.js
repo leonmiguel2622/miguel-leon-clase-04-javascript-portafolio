@@ -10,6 +10,7 @@ import { Portafolio }  from "./Portafolio.js";
 import { GitHubAPI }   from "./GitHubAPI.js";
 import { Contacto }    from "./Contacto.js";
 import { Animaciones } from "./Animaciones.js";
+import { Reloj }       from "./Reloj.js";
 
 // 🔧 Lo único que tú cambias para personalizar:
 const CONFIG = {
@@ -21,11 +22,13 @@ const CONFIG = {
 document.documentElement.classList.add("js");
 
 async function iniciar() {
-  // 1) Piezas que no dependen de datos: tema y animaciones.
+  // 1) Piezas que no dependen de datos: tema y animaciones y reloj.
   new Tema(document.querySelector("#btn-tema"));
   const animaciones = new Animaciones();
   animaciones.observarReveals();
   animaciones.entradaHero();
+  const reloj = new Reloj("#reloj");
+  reloj.iniciar();
 
   // 2) Cargar el contenido desde datos.json y pintarlo.
   const portafolio = new Portafolio("datos.json", animaciones);
