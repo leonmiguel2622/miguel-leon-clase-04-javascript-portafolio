@@ -17,7 +17,8 @@ codigo/
     ├── Portafolio.js   → clase: lee datos.json y pinta la página
     ├── GitHubAPI.js    → clase: pide tus datos reales a la API de GitHub
     ├── Contacto.js     → clase: valida el formulario y envía el correo
-    └── Animaciones.js  → clase: reveal al scroll, contadores, anime.js
+    ├── Animaciones.js  → clase: reveal al scroll, contadores, anime.js
+    └── Reloj.js        → clase: muestra la hora en el footer y se actualiza cada segundo
 ```
 
 > **Idea clave:** para actualizar tu portafolio **no tocas el HTML ni el JS**, solo
@@ -51,6 +52,33 @@ Ya sale de `datos.json` (`redes.github`). Si lo dejas en blanco, `main.js` usa
 2. Pega esa key en `js/main.js`, en `CONFIG.web3formsKey`.
 3. Listo: cuando alguien te escriba, el mensaje llega a **tu correo**.
 
+## ✨ Mejoras de la Clase 04 (tareas evaluativas)
+
+### 2) Frase desde JSON
+`datos.json` tiene `perfil.frase` (cita favorita). `Portafolio.js` crea `pintarFrase()` que la muestra en `.hero` con `id="p-frase"` y se llama desde `cargar()`. Criterio: cambiar la frase en el JSON y recargar cambia en la página sin tocar HTML ni JS.
+
+### 3) Clase Reloj (POO + módulo)
+`js/Reloj.js` exporta `class Reloj`:
+```js
+/* Mi clase Reloj muestra la hora en el footer y la actualiza
+   cada segundo con setInterval. La hice en archivo aparte para
+   POO y módulos: main.js solo la importa y arranca con
+   new Reloj("#reloj").iniciar() */
+```
+Se importa en `main.js` y se arranca con `new Reloj("#reloj").iniciar()`. Usa `setInterval(() => actualizar(), 1000)` y `Date.toLocaleTimeString('es-CO')`. El contenedor es `<p id="reloj">` en el footer.
+
+### 4) Validación con guarda anti-spam
+`Contacto.js` tiene guarda en `validar()`:
+```js
+if (datos.mensaje.toLowerCase().includes("http")) return "⚠️ No se permiten enlaces en el mensaje.";
+```
+Si el mensaje contiene `http` no hace `fetch`, muestra aviso y `return` antes de enviar.
+
+### 5) Mejora libre: Filtro de proyectos y GitHub
+* **Filtro proyectos:** `index.html` añade `#filtro-proyectos` con botones `todos/JS/HTML`. `Portafolio.js` tiene `pintarProyectos(lista)`, `filtrarProyectos(tag)` con `filter(p => p.tags.includes(tag))` y `activarFiltro()` con delegación de eventos.
+* **Filtro GitHub:** `index.html` añade `#filtro-github`. `main.js` guarda `window._reposCache` y filtra por `repo.language` con la misma lógica.
+*Por qué así:* separa datos de vista, filtra en memoria sin duplicar HTML y cada clase mantiene su responsabilidad.
+
 ## ✉️ Otras opciones de correo (gratis)
 
 | Herramienta | Cómo funciona | Cuándo usarla |
@@ -59,17 +87,11 @@ Ya sale de `datos.json` (`redes.github`). Si lo dejas en blanco, `main.js` usa
 | **Formspree** | Creas cuenta, te dan un *endpoint* por formulario. | Si quieres un panel de mensajes. |
 | **EmailJS** | *service + template + public key*; más pasos. | Si quieres plantillas de correo. |
 
-**Para cambiar a Formspree:** en `Contacto.js`, reemplaza la URL del `fetch` por tu endpoint
-`https://formspree.io/f/TU_ID` y quita `access_key` del `body`.
-
-**Para EmailJS:** se importa su SDK y se llama `emailjs.send(service, template, datos, publicKey)`
-en vez del `fetch`. Ver la guía avanzada.
-
 ## 🎬 Animaciones con librerías
 
 `Animaciones.js` ya trae la entrada del hero con **anime.js** (import dinámico, con plan B en
-CSS si no hay internet). En la guía avanzada hay ejemplos listos para **GSAP** también.
+CSS si no hay internet).
 
 ## ⚠️ Internet
 `fetch` a GitHub, el envío del correo y las librerías por CDN **usan internet**. Si la red se
-cae, el resto del portafolio se sigue viendo (hay `try/catch` en todo).
+cae, el resto del portafolio se sigue viendo (hay `try/catch` en todo). GitHub API sin token permite 60 peticiones/hora por IP (error `403` es normal si recargas mucho).
