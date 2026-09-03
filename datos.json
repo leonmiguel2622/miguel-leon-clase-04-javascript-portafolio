@@ -10,8 +10,8 @@
   },
 
   "sobreMi": [
-    "Escribe un párrafo real sobre ti: qué te trajo al desarrollo, qué te apasiona y a dónde quieres llegar.",
-    "Ahora mismo aprendo HTML, CSS y JavaScript. Este portafolio crece conmigo: para actualizarlo, solo edito este archivo datos.json."
+  "Soy Miguel León, aprendiz ADSO del SENA Bucaramanga. Llegué al desarrollo por curiosidad por entender cómo funcionan las apps que uso a diario, y me quedé por la satisfacción de resolver problemas y ver una idea convertirse en una interfaz que otras personas usan. Me apasiona el frontend limpio, el JavaScript y aprender algo nuevo cada día.",
+  "Ahora mismo fortalezco mis bases en HTML, CSS y JavaScript modular. Mi meta es seguir creciendo como desarrollador de software, aportar a proyectos reales y construir un portafolio que refleje mi progreso — por eso este sitio se actualiza solo editando este JSON."
   ],
 
   "skills": [
