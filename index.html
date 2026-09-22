@@ -3,67 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portafolio de desarrollador ADSO, SENA Bucaramanga.">
-  <title>Cargando…</title>
+  <meta name="description" content="Portafolio de Miguel León, desarrollador de software en formación ADSO, SENA Bucaramanga. Frontend, JavaScript modular, interfaces limpias.">
+  <meta name="theme-color" content="#1B1230">
+  <meta property="og:title" content="Miguel León · Frontend Developer">
+  <meta property="og:description" content="Portafolio personal de Miguel León: interfaces limpias, JS modular y proyectos reales.">
+  <meta property="og:type" content="website">
+  <title>Miguel León · Frontend Developer</title>
 
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23F1948A'/%3E%3Cstop offset='1' stop-color='%23F4B41A'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%231B1230'/%3E%3Ctext x='14' y='42' font-family='monospace' font-size='26' font-weight='bold' fill='url(%23g)'%3E%3C/%3E%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
-  <!-- Tipografías modernas (Google Fonts). Si la red falla, caen a las del sistema. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap">
-  <!-- Iconos (Font Awesome por CDN) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://api.github.com">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Miguel León","jobTitle":"Frontend Developer en formación","address":{"@type":"PostalAddress","addressLocality":"Bucaramanga","addressCountry":"CO"},"url":"https://github.com/leonmiguel2622"}
+  </script>
 </head>
 <body>
 
-  <!-- Botón de tema (claro/oscuro) -->
+  <a class="skip-link" href="#sobre-mi">Saltar al contenido</a>
+
+  <!-- Preloader premium -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo">&lt;/&gt;</div>
+      <div class="preloader__bar"><i id="preloader-fill"></i></div>
+      <p class="preloader__txt">cargando portafolio…</p>
+    </div>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><i id="scroll-fill"></i></div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
   <button id="btn-tema" class="theme-toggle" aria-label="Cambiar tema">
-    <i class="fa-solid fa-moon"></i>
+    <i class="fa-solid fa-moon" aria-hidden="true"></i>
   </button>
 
-  <!-- Barra de navegación (aparece al hacer scroll) -->
   <nav class="nav" id="nav" aria-label="Principal">
-    <a href="#inicio" class="nav__logo">&lt;/&gt;</a>
-    <ul class="nav__links">
-      <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#github">GitHub</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+    <a href="#inicio" class="nav__logo" aria-label="Inicio"><span class="nav__logo-bracket">&lt;</span>/&gt; <span class="nav__logo-name">miguel.leon</span></a>
+    <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#sobre-mi" data-nav="sobre-mi">Sobre mí</a></li>
+      <li><a href="#skills" data-nav="skills">Skills</a></li>
+      <li><a href="#proyectos" data-nav="proyectos">Proyectos</a></li>
+      <li><a href="#trayectoria" data-nav="trayectoria">Ruta</a></li>
+      <li><a href="#github" data-nav="github">GitHub</a></li>
+      <li><a href="#contacto" data-nav="contacto" class="nav__cta">Contacto</a></li>
     </ul>
   </nav>
 
-  <!-- ===== HERO (el texto lo rellena Portafolio.js desde datos.json) ===== -->
+  <!-- ===== HERO PREMIUM ===== -->
   <header class="hero" id="inicio">
     <div class="hero__aurora" aria-hidden="true"></div>
-    <div class="hero__inner">
-      <p class="eyebrow reveal" id="p-eyebrow">·</p>
-      <h1 class="hero__title reveal">
-        Hola, soy <span class="grad" id="p-nombre">…</span><span class="cursor">_</span>
-      </h1>
-      <p id="p-frase" class="hero__lead"></p>
-      <p class="hero__lead reveal" id="p-resumen">…</p>
-      <p class="muted reveal" id="p-titulo" style="margin-top:-1rem;margin-bottom:2rem"></p>
-      <div class="hero__cta reveal">
-        <a href="#github" class="btn btn--primary"><i class="fa-brands fa-github"></i> Ver mi trabajo</a>
-        <a href="#contacto" class="btn btn--ghost">Contáctame</a>
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+    <canvas id="hero-particulas" class="hero__canvas" aria-hidden="true"></canvas>
+
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <p class="hero__pill reveal"><span class="dot" aria-hidden="true"></span> <span id="p-eyebrow">Aprendiz ADSO · SENA Bucaramanga</span></p>
+        <h1 class="hero__title reveal">
+          Hola, soy <span class="grad" id="p-nombre">Miguel León</span>
+        </h1>
+        <p class="hero__typing reveal" aria-live="polite"><span class="prompt" aria-hidden="true">❯</span> <span id="typing">Desarrollador Frontend</span><span class="caret" aria-hidden="true">▍</span></p>
+        <p id="p-frase" class="hero__quote reveal"></p>
+        <p class="hero__lead reveal" id="p-resumen">Construyo interfaces limpias y aprendo algo nuevo todos los días.</p>
+        <p class="muted reveal hero__subtitle" id="p-titulo">Desarrollador de Software en formación</p>
+        <div class="hero__cta reveal">
+          <a href="#proyectos" class="btn btn--primary btn--shine magnetic"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Ver mis proyectos</a>
+          <a href="#contacto" class="btn btn--ghost magnetic"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Contáctame</a>
+          <a id="hero-github" href="https://github.com/leonmiguel2622" target="_blank" rel="noopener" class="btn btn--link magnetic" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a>
+        </div>
+        <div class="hero__stats reveal" role="list" aria-label="Resumen">
+          <div role="listitem"><strong id="h-stat-exp">2+</strong><span>años formando</span></div>
+          <div role="listitem"><strong id="h-stat-tech">4</strong><span>tech core</span></div>
+          <div role="listitem"><strong class="ok"><span class="dot sm" aria-hidden="true"></span>Open</strong><span>para prácticas</span></div>
+        </div>
+        <p class="hero__meta reveal"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span id="p-ubicacion">Bucaramanga, Colombia</span> <span aria-hidden="true">·</span> <i class="fa-solid fa-clock" aria-hidden="true"></i> <span id="hero-clock">--:--</span></p>
+      </div>
+
+      <figure class="hero__visual reveal" id="foto-wrap" aria-label="Fotografía de Miguel León">
+        <div class="orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="foto-tilt" id="foto-tilt">
+          <div class="foto-frame" id="foto-frame" role="button" tabindex="0" aria-label="Ampliar fotografía de Miguel León" title="Clic para ampliar">
+            <div class="foto-glow" aria-hidden="true"></div>
+            <img id="mi-foto" src="assets/images/mi-foto.jpg" alt="Fotografía de Miguel León, desarrollador de software" width="480" height="560" fetchpriority="high" decoding="async">
+            <div class="foto-glare" id="foto-glare" aria-hidden="true"></div>
+            <figcaption class="foto-badge" aria-hidden="true"><span class="dot"></span> SYS.MIGUEL-LEON // DEV</figcaption>
+            <div class="foto-scan" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="chip chip--1" aria-hidden="true"><i class="fa-brands fa-html5"></i> HTML</div>
+        <div class="chip chip--2" aria-hidden="true"><i class="fa-brands fa-css3-alt"></i> CSS</div>
+        <div class="chip chip--3" aria-hidden="true"><i class="fa-brands fa-js"></i> JavaScript</div>
+        <div class="chip chip--4" aria-hidden="true"><i class="fa-brands fa-git-alt"></i> Git</div>
+        <div class="exp-badge" aria-hidden="true"><strong>ADSO</strong><span>SENA · Dev</span></div>
+      </figure>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>HTML5 ✦ CSS3 ✦ JavaScript ✦ Git ✦ GitHub ✦ Responsive ✦ Accesibilidad ✦ POO ✦ fetch/API ✦&nbsp;</span>
+        <span>HTML5 ✦ CSS3 ✦ JavaScript ✦ Git ✦ GitHub ✦ Responsive ✦ Accesibilidad ✦ POO ✦ fetch/API ✦&nbsp;</span>
       </div>
     </div>
-    <a href="#sobre-mi" class="hero__scroll" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></a>
+
+    <a href="#sobre-mi" class="hero__scroll" aria-label="Ir a sobre mí"><span class="mouse"><i></i></span></a>
   </header>
 
-  <main>
+  <main id="contenido">
     <!-- ===== SOBRE MÍ ===== -->
     <section class="section" id="sobre-mi">
       <p class="eyebrow reveal">01 — Quién soy</p>
-      <div class="about reveal">
-        <figure class="about__photo">
-          <img id="gh-avatar" src="https://avatars.githubusercontent.com/u/0" alt="Foto de perfil">
-        </figure>
-        <div class="about__text">
-          <h2>Sobre mí</h2>
-          <!-- Los párrafos los inyecta Portafolio.js desde datos.json -->
-          <div id="sobre-mi-texto"></div>
+      <div class="sec-head reveal">
+        <h2>Sobre <span class="grad">mí</span></h2>
+        <p class="muted">Código limpio, aprendizaje constante y ganas de aportar a un equipo real.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card reveal spotlight">
+          <figure class="about__photo">
+            <img id="gh-avatar" src="assets/images/mi-foto.jpg" alt="Foto de perfil de Miguel León" loading="lazy" width="300" height="340">
+          </figure>
+          <div class="about__text">
+            <div id="sobre-mi-texto">
+              <p>Soy Miguel León, aprendiz ADSO del SENA Bucaramanga. Me apasiona el frontend limpio y aprender cada día.</p>
+            </div>
+          </div>
+          <div class="info-grid" id="info-grid"><!-- desde JSON --></div>
+        </div>
+        <div class="code-window reveal" aria-label="Fragmento de código representativo">
+          <div class="code-window__bar"><i></i><i></i><i></i><span>miguel-leon.js</span></div>
+<pre class="code-window__code"><code><span class="k">const</span> <span class="v">dev</span> = {
+  nombre: <span class="s">"Miguel León"</span>,
+  base: <span class="s">"Bucaramanga, CO"</span>,
+  stack: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>, <span class="s">"JavaScript"</span>],
+  foco: <span class="s">"interfaces limpias"</span>,
+  aprendeCadaDia: <span class="b">true</span>
+};
+
+<span class="k">async function</span> <span class="f">construirFuturo</span>() {
+  <span class="k">while</span> (dev.aprendeCadaDia) {
+    <span class="k">await</span> dev.<span class="f">mejorar</span>(<span class="s">"1%"</span>);
+  }
+  <span class="k">return</span> <span class="s">"listo para prácticas ✦"</span>;
+}</code></pre>
+          <div class="code-window__foot"><span class="dot"></span> JS modular · POO · fetch/API</div>
         </div>
       </div>
     </section>
@@ -71,82 +161,159 @@
     <!-- ===== SKILLS ===== -->
     <section class="section" id="skills">
       <p class="eyebrow reveal">02 — Lo que sé hacer</p>
-      <h2 class="reveal">Skills</h2>
-      <ul class="skills reveal" id="skills-lista"><!-- se llena desde JSON --></ul>
+      <div class="sec-head reveal">
+        <h2>Skills <span class="grad">reales</span></h2>
+        <p class="muted">Solo lo que uso de verdad. Sin humo: nivel honesto de aprendiz que practica a diario.</p>
+      </div>
+      <ul class="skills-grid" id="skills-lista"><!-- se llena desde JSON --></ul>
     </section>
 
-    <!-- ===== PROYECTOS (desde JSON) ===== -->
+    <!-- ===== PROYECTOS ===== -->
     <section class="section" id="proyectos">
       <p class="eyebrow reveal">03 — Lo que he construido</p>
-      <h2 class="reveal">Proyectos</h2>
-      <div id="filtro-proyectos" class="filtro reveal" style="margin-bottom:1.2rem;display:flex;gap:.5rem;flex-wrap:wrap">
-        <button data-tag="todos" class="btn btn--primary">Todos</button>
-        <button data-tag="JS" class="btn btn--ghost">JS</button>
-        <button data-tag="HTML" class="btn btn--ghost">HTML</button>
-        <button data-tag="En progreso" class="btn btn--ghost">En progreso</button>
+      <div class="sec-head reveal">
+        <h2>Proyectos <span class="grad">destacados</span></h2>
+        <p class="muted">Cada tarjeta cuenta qué hace, con qué está hecha y dónde verla.</p>
       </div>
-      <div class="repos reveal" id="proyectos-lista"><!-- se llena desde JSON --></div>
+      <div id="filtro-proyectos" class="filtro reveal">
+        <button data-tag="todos" class="btn btn--primary" aria-pressed="true">Todos</button>
+        <button data-tag="JS" class="btn btn--ghost" aria-pressed="false">JS</button>
+        <button data-tag="HTML" class="btn btn--ghost" aria-pressed="false">HTML</button>
+        <button data-tag="En progreso" class="btn btn--ghost" aria-pressed="false">En progreso</button>
+      </div>
+      <div class="projects" id="proyectos-lista"><!-- se llena desde JSON --></div>
     </section>
 
-    <!-- ===== GITHUB (datos reales por API) ===== -->
+    <!-- ===== TRAYECTORIA ===== -->
+    <section class="section" id="trayectoria">
+      <p class="eyebrow reveal">04 — Mi ruta</p>
+      <div class="sec-head reveal">
+        <h2>Trayectoria <span class="grad">ADSO</span></h2>
+        <p class="muted">De la curiosidad al código: dónde estoy y a dónde voy.</p>
+      </div>
+      <ol class="timeline" id="timeline"><!-- desde JSON --></ol>
+    </section>
+
+    <!-- ===== GITHUB ===== -->
     <section class="section" id="github">
-      <p class="eyebrow reveal">04 — Datos reales</p>
-      <h2 class="reveal"><i class="fa-brands fa-github"></i> Mi GitHub</h2>
+      <p class="eyebrow reveal">05 — Datos reales</p>
+      <div class="sec-head reveal">
+        <h2><i class="fa-brands fa-github" aria-hidden="true"></i> Mi <span class="grad">GitHub</span></h2>
+        <p class="muted">Conectado en vivo a la API pública. Sin mocks. Toca una tarjeta para ver detalle.</p>
+      </div>
       <div class="stats reveal">
-        <div class="stat"><span class="stat__num" id="stat-repos">0</span><span class="stat__label">Repositorios</span></div>
-        <div class="stat"><span class="stat__num" id="stat-followers">0</span><span class="stat__label">Seguidores</span></div>
-        <div class="stat"><span class="stat__num" id="stat-following">0</span><span class="stat__label">Siguiendo</span></div>
+        <div class="stat spotlight"><i class="fa-solid fa-book-bookmark" aria-hidden="true"></i><span class="stat__num" id="stat-repos">0</span><span class="stat__label">Repositorios</span></div>
+        <div class="stat spotlight"><i class="fa-solid fa-users" aria-hidden="true"></i><span class="stat__num" id="stat-followers">0</span><span class="stat__label">Seguidores</span></div>
+        <div class="stat spotlight"><i class="fa-solid fa-user-plus" aria-hidden="true"></i><span class="stat__num" id="stat-following">0</span><span class="stat__label">Siguiendo</span></div>
       </div>
-      <div id="filtro-github" class="filtro reveal" style="margin-bottom:1.2rem;display:flex;gap:.5rem;flex-wrap:wrap">
-        <button data-lang="todos" class="btn btn--primary">Todos</button>
-        <button data-lang="JavaScript" class="btn btn--ghost">JavaScript</button>
-        <button data-lang="HTML" class="btn btn--ghost">HTML</button>
-        <button data-lang="CSS" class="btn btn--ghost">CSS</button>
+      <div class="gh-toolbar reveal">
+        <label class="gh-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="gh-buscar" type="search" placeholder="Buscar repos… (nombre, descripción)" autocomplete="off"></label>
+        <label class="gh-sort">Orden
+          <select id="gh-orden">
+            <option value="updated">Recientes</option>
+            <option value="stars">Más estrellas</option>
+            <option value="name">A–Z</option>
+          </select>
+        </label>
+        <span class="gh-count muted" id="gh-count" aria-live="polite"></span>
       </div>
-      <div class="repos reveal" id="gh-repos"><p class="muted">Cargando repositorios…</p></div>
+      <div id="filtro-github" class="filtro reveal">
+        <button data-lang="todos" class="btn btn--primary" aria-pressed="true">Todos</button>
+        <button data-lang="JavaScript" class="btn btn--ghost" aria-pressed="false">JavaScript</button>
+        <button data-lang="HTML" class="btn btn--ghost" aria-pressed="false">HTML</button>
+        <button data-lang="CSS" class="btn btn--ghost" aria-pressed="false">CSS</button>
+      </div>
+      <div class="repos reveal" id="gh-repos" role="list"><p class="muted">Cargando repositorios…</p></div>
+      <div class="gh-more reveal">
+        <button id="gh-ver-mas" class="btn btn--primary btn--shine magnetic" type="button"><i class="fa-solid fa-plus" aria-hidden="true"></i> Ver más repositorios</button>
+        <p class="muted gh-hint" id="gh-hint"></p>
+        <a id="gh-ver-todos" class="btn btn--ghost" href="https://github.com/leonmiguel2622?tab=repositories" target="_blank" rel="noopener" hidden>Ver todos en GitHub →</a>
+      </div>
     </section>
 
     <!-- ===== CONTACTO ===== -->
     <section class="section" id="contacto">
-      <p class="eyebrow reveal">05 — Hablemos</p>
-      <h2 class="reveal">Contacto</h2>
-      <form id="form-contacto" class="form reveal">
-        <div class="form__row">
-          <label>Nombre <input type="text" name="nombre" placeholder="¿Cómo te llamas?"></label>
-          <label>Correo <input type="email" name="correo" placeholder="tucorreo@ejemplo.com"></label>
+      <p class="eyebrow reveal">06 — Hablemos</p>
+      <div class="sec-head reveal">
+        <h2>¿Creamos algo <span class="grad">juntos?</span></h2>
+        <p class="muted">Prácticas, proyectos, feedback o una buena charla dev. Respondo rápido.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <button class="copy-mail spotlight" id="copy-mail" type="button" aria-live="polite">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <span><small>escríbeme a</small><strong id="copy-mail-txt">leonjohan481@gmail.com</strong></span>
+            <em id="copy-hint">copiar</em>
+          </button>
+          <address class="social">
+            <a id="red-github" href="https://github.com/leonmiguel2622" target="_blank" rel="noopener" aria-label="GitHub de Miguel León"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+            <a id="red-linkedin" href="https://www.linkedin.com/in/miguel-angel-león-oliveros-54a522357" target="_blank" rel="noopener" aria-label="LinkedIn de Miguel León"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+            <a id="red-correo" href="mailto:leonjohan481@gmail.com" aria-label="Correo de Miguel León"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+          </address>
+          <div class="linkedin-card spotlight" id="linkedin-badge">
+            <div class="linkedin-card__avatar" aria-hidden="true"><i class="fa-brands fa-linkedin"></i></div>
+            <div class="linkedin-card__info">
+              <strong>Miguel Ángel León Oliveros</strong>
+              <span class="muted">Aprendiz ADSO · SENA Bucaramanga</span>
+              <a class="linkedin-card__link" id="li-link" href="https://www.linkedin.com/in/miguel-angel-león-oliveros-54a522357" target="_blank" rel="noopener">Ver perfil →</a>
+            </div>
+          </div>
+          <ul class="contact-points">
+            <li><i class="fa-solid fa-bolt" aria-hidden="true"></i> Respuesta en menos de 24h</li>
+            <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Bucaramanga · remoto OK</li>
+            <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Disponible para prácticas ADSO</li>
+          </ul>
         </div>
-        <label>Mensaje <textarea name="mensaje" rows="4" placeholder="Cuéntame…"></textarea></label>
-        <p id="form-msg" class="form__msg" role="status"></p>
-        <button type="submit" class="btn btn--primary"><i class="fa-solid fa-paper-plane"></i> Enviar mensaje</button>
-      </form>
-      <!-- Redes: los enlaces los rellena Portafolio.js desde datos.json -->
-      <address class="social">
-        <a id="red-github" href="#" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a id="red-linkedin" href="#" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-        <a id="red-correo" href="#" aria-label="Correo"><i class="fa-solid fa-envelope"></i></a>
-      </address>
-
-      <!-- Badge OFICIAL de LinkedIn. Portafolio.js le pone tu usuario (data-vanity)
-           desde datos.json y carga el script de LinkedIn que lo dibuja. Si no hay
-           internet, se ve el enlace de respaldo de adentro. -->
-      <div class="linkedin-badge reveal" id="linkedin-badge">
-        <div class="badge-base LI-profile-badge"
-             data-locale="es_ES" data-size="medium" data-theme="dark"
-             data-type="VERTICAL" data-vanity="tu-usuario" data-version="v1">
-          <a class="badge-base__link LI-simple-link" id="li-link"
-             href="#" target="_blank" rel="noopener">Ver mi perfil de LinkedIn</a>
-        </div>
+        <form id="form-contacto" class="form form--card reveal spotlight" novalidate>
+          <div class="form__row">
+            <label for="f-nombre">Nombre <input id="f-nombre" type="text" name="nombre" placeholder="¿Cómo te llamas?" autocomplete="name" required minlength="2"></label>
+            <label for="f-correo">Correo <input id="f-correo" type="email" name="correo" placeholder="tucorreo@ejemplo.com" autocomplete="email" required></label>
+          </div>
+          <label for="f-mensaje">Mensaje <span class="muted" id="msg-count" aria-live="polite">0/500</span><textarea id="f-mensaje" name="mensaje" rows="5" placeholder="Hola Miguel, vi tu portafolio y…" required minlength="10" maxlength="500"></textarea></label>
+          <p id="form-msg" class="form__msg" role="status" aria-live="polite"></p>
+          <button type="submit" class="btn btn--primary btn--shine"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Enviar mensaje</button>
+        </form>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Hecho con <span class="grad">HTML · CSS · JS modular</span> en el curso de ADSO · SENA</p>
-    <p class="muted">Contenido cargado desde <code>datos.json</code> · © 2026</p>
+    <button class="to-top" id="to-top" aria-label="Volver arriba"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+    <p class="footer__logo">&lt;/&gt; <strong>miguel.leon</strong> <span class="grad">· Frontend Developer</span></p>
+    <p class="muted">Hecho con HTML · CSS · JS modular · SENA ADSO · <code>datos.json</code> · © <span id="year">2026</span></p>
     <p id="reloj" class="muted"></p>
   </footer>
 
-  <!-- Un solo punto de entrada; él importa las demás clases (módulos ES) -->
+  <!-- Modal detalle repo -->
+  <dialog class="modal" id="repo-modal" aria-labelledby="modal-title">
+    <div class="modal__card">
+      <button class="modal__close" id="modal-close" aria-label="Cerrar detalle">✕</button>
+      <p class="eyebrow" id="modal-lang">REPO</p>
+      <h3 id="modal-title">Repo</h3>
+      <p class="muted" id="modal-desc"></p>
+      <div class="modal__stats" id="modal-stats"></div>
+      <div class="modal__clone">
+        <code id="modal-clone">git clone …</code>
+        <button class="btn btn--ghost" id="modal-copy" type="button"><i class="fa-solid fa-copy" aria-hidden="true"></i> Copiar</button>
+      </div>
+      <div class="modal__actions">
+        <a id="modal-link" class="btn btn--primary" href="#" target="_blank" rel="noopener">Ver en GitHub →</a>
+        <a id="modal-home" class="btn btn--ghost" href="#" target="_blank" rel="noopener" hidden>Demo →</a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Lightbox foto -->
+  <dialog class="modal modal--foto" id="foto-modal" aria-label="Fotografía ampliada">
+    <div class="modal__card modal__card--foto">
+      <button class="modal__close" id="foto-close" aria-label="Cerrar foto">✕</button>
+      <img id="foto-big" src="assets/images/mi-foto.jpg" alt="Fotografía ampliada de Miguel León">
+      <p class="muted">Miguel León · Frontend Developer · Bucaramanga</p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
