@@ -55,11 +55,14 @@ export class Animaciones {
       const r = frame.getBoundingClientRect();
       gx = ((e.clientX - r.left) / r.width) * 100; gy = ((e.clientY - r.top) / r.height) * 100;
     }, { passive: true });
+    let vis = true;
+    new IntersectionObserver(([e]) => { vis = e.isIntersecting; }).observe(tilt);
+    document.addEventListener("visibilitychange", () => { vis = !document.hidden; });
     const loop = () => {
+      if (!vis) { requestAnimationFrame(loop); return; } // fuera de pantalla o pestaña oculta: no se pinta nada
       cx += (mx * 13 - cx) * 0.07; cy += (my * 10 - cy) * 0.07;
       tilt.style.transform = `rotateY(${(cx * 0.9).toFixed(2)}deg) rotateX(${(-cy * 0.9).toFixed(2)}deg)`;
       frame.style.transform = `translate3d(${cx.toFixed(2)}px, ${cy.toFixed(2)}px, 0)`;
-      if (glare) glare.style.background = `linear-gradient(115deg, transparent 30%, rgba(255,255,255,.20) 48%, transparent 62%)`;
       requestAnimationFrame(loop);
     };
     requestAnimationFrame(loop);
@@ -67,12 +70,18 @@ export class Animaciones {
   particulasHero() {
     const canvas = document.querySelector("#hero-particulas");
     if (!canvas || this.reduced) return;
+    // Calidad adaptativa: gama baja / ahorro de datos = menos partículas, sin líneas ni repulsión.
+    const saveData = navigator.connection?.saveData === true;
+    const lowCpu = (navigator.hardwareConcurrency || 8) <= 4;
+    if (saveData) return; // con ahorro de datos el hero va estático (el CSS ya oculta el canvas)
     const ctx = canvas.getContext("2d"), hero = canvas.closest(".hero");
     let w = 0, h = 0, pts = [], mouse = { x: -999, y: -999 };
     const mobile = () => innerWidth < 700;
+    const low = () => mobile() && lowCpu;
+    const conLineas = () => !mobile() && !lowCpu;
     const resize = () => {
       w = canvas.width = hero.clientWidth; h = canvas.height = hero.clientHeight;
-      const n = mobile() ? 24 : 55;
+      const n = low() ? 12 : mobile() ? 16 : 48;
       pts = Array.from({ length: n }, () => ({
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
@@ -81,24 +90,29 @@ export class Animaciones {
       }));
     };
     resize(); addEventListener("resize", resize);
-    hero.addEventListener("mousemove", (e) => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
-    hero.addEventListener("mouseleave", () => { mouse.x = -999; });
+    if (!low()) {
+      hero.addEventListener("mousemove", (e) => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+      hero.addEventListener("mouseleave", () => { mouse.x = -999; });
+    }
     let vis = true;
     new IntersectionObserver(([e]) => { vis = e.isIntersecting; }).observe(hero);
+    document.addEventListener("visibilitychange", () => { vis = !document.hidden; });
     const draw = () => {
       requestAnimationFrame(draw);
       if (!vis) return;
       ctx.clearRect(0, 0, w, h);
       for (const p of pts) {
-        const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
-        if (d < 120 && d > 1) { p.x += (dx / d) * 0.7; p.y += (dy / d) * 0.7; }
+        if (!low()) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
+          if (d < 120 && d > 1) { p.x += (dx / d) * 0.7; p.y += (dy / d) * 0.7; }
+        }
         p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > w) p.vx *= -1;
         if (p.y < 0 || p.y > h) p.vy *= -1;
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${p.c},0.6)`; ctx.fill();
       }
-      if (!mobile()) for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+      if (conLineas()) for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
         const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.hypot(dx, dy);
         if (d < 115) { ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.strokeStyle = `rgba(187,143,206,${(0.15 * (1 - d / 115)).toFixed(3)})`; ctx.lineWidth = 1; ctx.stroke(); }
       }
