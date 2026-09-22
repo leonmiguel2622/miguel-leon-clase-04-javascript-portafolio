@@ -3,45 +3,85 @@
     "nombre": "Miguel León",
     "titulo": "Desarrollador de Software en formación",
     "eyebrow": "Aprendiz ADSO · SENA Bucaramanga",
-    "resumen": "Construyo interfaces limpias y aprendo algo nuevo todos los días. Este portafolio se arma solo leyendo un archivo de datos.",
+    "resumen": "Construyo interfaces limpias, rápidas y accesibles. Me especializo en HTML, CSS y JavaScript modular, y aprendo algo nuevo todos los días.",
     "ubicacion": "Bucaramanga, Colombia",
     "correo": "leonjohan481@gmail.com",
-    "frase": "haz de tu vida un sueño y de tu sueño una realidad. -Antoine de Saint-Exupéry"
+    "foto": "assets/images/mi-foto.jpg",
+    "frase": "Haz de tu vida un sueño y de tu sueño una realidad. — Antoine de Saint-Exupéry",
+    "roles": ["Desarrollador Frontend", "JavaScript Developer", "Aprendiz ADSO SENA", "Creador de Interfaces Limpias"],
+    "disponible": true,
+    "añosFormacion": "2+",
+    "enfoque": ["Interfaces accesibles", "JS modular", "Git & trabajo en equipo"]
   },
 
   "sobreMi": [
-  "Soy Miguel León, aprendiz ADSO del SENA Bucaramanga. Llegué al desarrollo por curiosidad por entender cómo funcionan las apps que uso a diario, y me quedé por la satisfacción de resolver problemas y ver una idea convertirse en una interfaz que otras personas usan. Me apasiona el frontend limpio, el JavaScript y aprender algo nuevo cada día.",
-  "Ahora mismo fortalezco mis bases en HTML, CSS y JavaScript modular. Mi meta es seguir creciendo como desarrollador de software, aportar a proyectos reales y construir un portafolio que refleje mi progreso — por eso este sitio se actualiza solo editando este JSON."
+    "Soy Miguel León, aprendiz ADSO del SENA Bucaramanga. Llegué al desarrollo por curiosidad por entender cómo funcionan las apps que uso a diario, y me quedé por la satisfacción de resolver problemas y ver una idea convertirse en una interfaz que otras personas usan.",
+    "Ahora mismo fortalezco mis bases en HTML, CSS y JavaScript modular con POO, fetch/API y buenas prácticas. Mi meta es crecer como desarrollador de software, aportar a proyectos reales y construir un portafolio que refleje mi progreso.",
+    "Me interesan el frontend limpio, el rendimiento, la accesibilidad y el trabajo con Git/GitHub en equipo."
+  ],
+
+  "infoCards": [
+    { "icono": "fa-solid fa-location-dot", "titulo": "Ubicación", "texto": "Bucaramanga, Colombia" },
+    { "icono": "fa-solid fa-graduation-cap", "titulo": "Formación", "texto": "ADSO · SENA (en curso)" },
+    { "icono": "fa-solid fa-code", "titulo": "Enfoque", "texto": "Frontend · JS modular" },
+    { "icono": "fa-solid fa-people-group", "titulo": "Cómo trabajo", "texto": "Git, issues y código limpio" }
   ],
 
   "skills": [
-    { "nombre": "HTML",          "nivel": 90, "icono": "fa-brands fa-html5" },
-    { "nombre": "CSS",           "nivel": 80, "icono": "fa-brands fa-css3-alt" },
-    { "nombre": "JavaScript",    "nivel": 65, "icono": "fa-brands fa-js" },
-    { "nombre": "Git & GitHub",  "nivel": 70, "icono": "fa-brands fa-git-alt" }
+    { "nombre": "HTML",          "nivel": 90, "icono": "fa-brands fa-html5", "detalle": "Semántico, accesible, SEO básico" },
+    { "nombre": "CSS",           "nivel": 80, "icono": "fa-brands fa-css3-alt", "detalle": "Grid, Flex, responsive, variables" },
+    { "nombre": "JavaScript",    "nivel": 65, "icono": "fa-brands fa-js", "detalle": "DOM, fetch, módulos, POO" },
+    { "nombre": "Git & GitHub",  "nivel": 70, "icono": "fa-brands fa-git-alt", "detalle": "Branches, PRs, GitHub Pages" }
+  ],
+
+  "trayectoria": [
+    {
+      "periodo": "2024 — Actualidad",
+      "titulo": "Aprendiz ADSO · SENA Bucaramanga",
+      "texto": "Análisis y Desarrollo de Software. Fundamentos de programación, HTML/CSS/JS, POO, bases de datos y trabajo por proyectos.",
+      "tags": ["ADSO", "Frontend", "JS"]
+    },
+    {
+      "periodo": "2025",
+      "titulo": "Portafolio modular con JSON + GitHub API",
+      "texto": "Este sitio: arquitectura por clases ES, contenido en JSON, datos reales de GitHub, filtros, tema claro/oscuro y animaciones nativas.",
+      "tags": ["HTML", "CSS", "JS"]
+    },
+    {
+      "periodo": "Siguiente",
+      "titulo": "Prácticas + proyectos reales",
+      "texto": "Busco prácticas donde aportar con frontend, aprender de un equipo y sumar proyectos con impacto real.",
+      "tags": ["En progreso"]
+    }
   ],
 
   "proyectos": [
     {
       "nombre": "Mi Portafolio",
-      "descripcion": "Este mismo sitio: HTML, CSS y JavaScript modular con datos desde JSON.",
+      "descripcion": "Este mismo sitio: HTML, CSS y JavaScript modular con POO, datos desde JSON, GitHub API real, parallax nativo y partículas tech.",
       "tags": ["HTML", "CSS", "JS"],
-      "enlace": "#",
-      "repo": "https://leonmiguel2622.github.io/miguel-leon-clase-04-javascript-portafolio/"
+      "enlace": "#inicio",
+      "repo": "https://github.com/leonmiguel2622/miguel-leon-clase-04-javascript-portafolio",
+      "año": "2025",
+      "destacado": true,
+      "estado": "En evolución"
     },
     {
       "nombre": "Proyecto de equipo",
-      "descripcion": "Reemplaza esto por un proyecto real tuyo. Cuenta qué problema resuelve.",
+      "descripcion": "Espacio para tu próximo proyecto real: cuenta qué problema resuelve, tu rol y qué aprendiste. (Edita este JSON cuando lo tengas).",
       "tags": ["En progreso"],
-      "enlace": "#",
-      "repo": "#"
+      "enlace": "#contacto",
+      "repo": "#",
+      "año": "2026",
+      "destacado": false,
+      "estado": "En progreso"
     }
   ],
 
   "redes": {
     "github": "leonmiguel2622",
-    "linkedin": "https://www.linkedin.com/in/tu-usuario",
-    "linkedinUsuario": "tu-usuario",
-    "correo": "tucorreo@ejemplo.com"
+    "linkedin": "https://www.linkedin.com/in/miguel-angel-león-oliveros-54a522357",
+    "linkedinUsuario": "miguel-angel-león-oliveros-54a522357",
+    "correo": "leonjohan481@gmail.com"
   }
-} 
+}
