@@ -87,10 +87,12 @@ Si el mensaje contiene `http` no hace `fetch`, muestra aviso y `return` antes de
 | **Formspree** | Creas cuenta, te dan un *endpoint* por formulario. | Si quieres un panel de mensajes. |
 | **EmailJS** | *service + template + public key*; más pasos. | Si quieres plantillas de correo. |
 
-## 🎬 Animaciones con librerías
+## 🎬 Animaciones sin librerías (nativo)
 
-`Animaciones.js` ya trae la entrada del hero con **anime.js** (import dinámico, con plan B en
-CSS si no hay internet).
+`Animaciones.js` usa solo web nativa: `IntersectionObserver` para reveal,
+`requestAnimationFrame` para contadores, parallax con lerp y canvas de
+partículas tech. No se necesita `anime.js` ni `npm`. Se respeta
+`prefers-reduced-motion` y táctil.
 
 ## ⚠️ Internet
 `fetch` a GitHub, el envío del correo y las librerías por CDN **usan internet**. Si la red se
