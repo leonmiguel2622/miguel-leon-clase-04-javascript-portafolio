@@ -892,9 +892,8 @@ code {
   left: 130%;
 }
 
-.magnetic {
-  will-change: transform;
-}
+/* Sin will-change global: reservar memoria GPU por botón es caro en móviles.
+   El transform del hover lo compone el navegador sin ayuda. */
 
 /* ================= SECCIONES ================= */
 main {
@@ -1425,17 +1424,6 @@ html.js .skill-card.is-visible .bar i {
   border-radius: 2px;
   background: linear-gradient(var(--accent), var(--morado), var(--cian));
   opacity: .6;
-}
-
-.timeline::after {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 6px;
-  bottom: 6px;
-  width: 2px;
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 .timeline li {
@@ -2096,6 +2084,26 @@ html.js .hero .reveal.is-visible {
   transition-duration: .8s;
 }
 
+/* ================= RENDIMIENTO =================
+   content-visibility: el navegador se salta el render de lo que está
+   fuera de pantalla. Ahorra mucho en móviles de gama baja. */
+.section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+.project,
+.repo,
+.skill-card,
+.timeline li {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 260px;
+}
+
+img {
+  max-width: 100%;
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 980px) {
   .hero__grid {
@@ -2209,6 +2217,43 @@ html.js .hero .reveal.is-visible {
     flex-direction: column;
     align-items: stretch;
   }
+
+  /* --- Ahorro GPU en móvil: sin blur de fondo ni capas fijas caras --- */
+  .nav,
+  .hero__pill,
+  .hero__stats,
+  .foto-badge,
+  .theme-toggle {
+    backdrop-filter: none;
+  }
+
+  .nav {
+    background: var(--bg);
+  }
+
+  .hero__pill,
+  .hero__stats {
+    background: var(--surface);
+  }
+
+  .hero__aurora {
+    inset: -10%;
+    filter: blur(40px);
+    opacity: .4;
+    animation: none;
+  }
+
+  .hero__orb {
+    display: none;
+  }
+
+  .noise {
+    display: none;
+  }
+
+  .foto-scan {
+    animation: none;
+  }
 }
 
 @media (max-width: 560px) {
@@ -2231,6 +2276,10 @@ html.js .hero .reveal.is-visible {
 
   .foto-frame {
     width: min(80vw, 320px);
+  }
+
+  .orbit {
+    display: none;
   }
 
   .modal__actions .btn {
@@ -2268,5 +2317,30 @@ html.js .hero .reveal.is-visible {
 
   .skel {
     animation: none;
+  }
+}
+
+/* ================= AHORRO DE DATOS =================
+   Chrome/Android "Data Saver": fondos estáticos, sin canvas ni extras. */
+@media (prefers-reduced-data: reduce) {
+  .hero__aurora,
+  .hero__orb,
+  .hero__grid-bg,
+  .hero__canvas,
+  .noise,
+  .marquee,
+  .orbit,
+  .foto-scan,
+  .cursor-glow {
+    display: none;
+  }
+
+  .preloader {
+    display: none;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
